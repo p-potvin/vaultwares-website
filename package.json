@@ -1,5 +1,5 @@
 {
-  "name": "vaultwares-v1",
+  "name": "vaultwares-website",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -44,7 +44,7 @@
   "main": "index*.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/p-potvin/vaultwares-v1.git"
+    "url": "git+https://github.com/p-potvin/vaultwares-website.git"
   },
   "keywords": [
     "vaultwares",
@@ -57,7 +57,7 @@
   "author": "VaultWares",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/p-potvin/vaultwares-v1/issues"
+    "url": "https://github.com/p-potvin/vaultwares-website/issues"
   },
   "homepage": "https://vaultwares.com"
 }

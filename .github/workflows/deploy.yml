@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         env:
-          VITE_BASE_URL: /vaultwares-v1/
+          VITE_BASE_URL: /vaultwares-website/
         run: npm run build
 
       - name: Upload Pages artifact

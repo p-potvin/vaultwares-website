@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/p-potvin/vaultwares-docs/main/logo/vaultwares-logo.svg">
 
-# vaultwares-v1
+# vaultwares-website
 
 **Official VaultWares Company Website**  
 **Part of the VaultWares Ecosystem** • <a href="https://docs.vaultwares.com">docs.vaultwares.com</a> • <a href="https://vaultwares.com">vaultwares.com</a>
@@ -20,8 +20,8 @@ This repository hosts the main marketing site, product showcase, documentation l
 ## Quick Start (Development)
 
 ```bash
-git clone https://github.com/p-potvin/vaultwares-v1.git
-cd vaultwares-v1
+git clone https://github.com/p-potvin/vaultwares-website.git
+cd vaultwares-website
 npm install
 npm run dev
 ```

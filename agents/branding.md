@@ -1,4 +1,4 @@
-# Agent Branding Reference (local mirror for vaultwares-v1)
+# Agent Branding Reference (local mirror for vaultwares-website)
 
 This file is a local copy for agents.
 
