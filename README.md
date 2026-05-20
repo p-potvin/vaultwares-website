@@ -11,7 +11,7 @@
 This repository hosts the main marketing site, product showcase, documentation links, and company information. It serves as the public entry point for the entire VaultWares ecosystem.
 
 ## Features
-- Clean, privacy-first design using vault-themes
+- Clean, privacy-first design using vaultwares-themes
 - Product catalog (Vault Central, Pipelines, Flows, Player, Agentciation, etc.)
 - Strong emphasis on 100% FOSS philosophy
 - Links to all repositories and central documentation
