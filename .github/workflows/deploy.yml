@@ -22,7 +22,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          fetch-depth: 1
+
+      - name: Init vaultwares-themes submodule
+        run: git submodule update --init --depth 1 vaultwares-themes
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
