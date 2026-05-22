@@ -1,6 +1,7 @@
 import { Lock, Server, Cpu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { RelayDistributedIcon } from '../icons/vaultwares-icons';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -11,7 +12,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3 text-vw-console-gold">
-              <img src="/favicon.svg" alt="" className="h-7 w-7" />
+              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-vw-console-elevated text-white">
+                <RelayDistributedIcon className="h-4 w-4" />
+              </span>
               <span className="text-lg font-semibold tracking-tight text-white">
                 Vault<span className="text-vw-console-gold">Wares</span>
               </span>

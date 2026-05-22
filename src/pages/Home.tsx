@@ -8,10 +8,12 @@ import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import { apiFetch } from '../lib/apiFetch';
 import { RelayCoreIcon, RelayDistributedIcon, UtilityBlockIcon } from '../icons/vaultwares-icons';
+import { useMemo } from 'react';
 
 export default function Home() {
   const { t, i18n } = useTranslation();
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const [spark, setSpark] = useState(0);
 
   useEffect(() => {
     apiFetch('/api/products')
@@ -22,6 +24,36 @@ export default function Home() {
       .then((data: Product[]) => setFeaturedProducts(data.slice(0, 3)))
       .catch(() => setFeaturedProducts(MOCK_PRODUCTS.slice(0, 3)));
   }, [i18n.language]); // Re-fetch when language changes
+
+  useEffect(() => {
+    const interval = setInterval(() => setSpark((x) => x + 1), 1200);
+    return () => clearInterval(interval);
+  }, []);
+
+  const series = useMemo(() => {
+    const base = 42 + ((spark % 7) - 3) * 2;
+    return Array.from({ length: 36 }, (_, i) => {
+      const wave = Math.sin((i / 36) * Math.PI * 2) * 12;
+      const jitter = ((i * 17 + spark * 29) % 9) - 4;
+      return Math.max(6, base + wave + jitter);
+    });
+  }, [spark]);
+
+  const lineD = useMemo(() => {
+    const w = 360;
+    const h = 120;
+    const max = Math.max(...series);
+    const min = Math.min(...series);
+    const range = Math.max(1, max - min);
+    const xStep = w / (series.length - 1);
+    return series
+      .map((v, idx) => {
+        const x = idx * xStep;
+        const y = h - ((v - min) / range) * (h - 8) - 4;
+        return `${idx === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)}`;
+      })
+      .join(' ');
+  }, [series]);
 
   return (
     <motion.div
@@ -98,31 +130,141 @@ export default function Home() {
             transition={{ delay: 0.35 }}
             className="vw-card p-6"
           >
-            <div className="mb-6 flex items-center justify-between">
+            <div className="mb-6 flex items-start justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-vw-console-elevated text-violet-100">
                   <RelayDistributedIcon className="h-8 w-8 text-vw-warm-bg" />
                 </div>
                 <div>
-                  <div className="font-mono text-sm text-white">VaultWares</div>
-                  <div className="text-xs text-violet-100/45">Operational Console</div>
+                  <div className="font-mono text-sm text-white">Telemetry</div>
+                  <div className="text-xs text-violet-100/45">LED-driven health + signals</div>
                 </div>
               </div>
-              <div className="vw-led h-2.5 w-2.5 rounded-full bg-vw-signal-relay shadow-lg shadow-vw-signal-relay/40" />
+              <div className="flex items-center gap-2 rounded-full border border-white/5 bg-vw-console-bg/55 px-3 py-1.5">
+                <span className="vw-led h-2 w-2 rounded-full bg-vw-signal-online shadow-lg shadow-vw-signal-online/35" />
+                <span className="vw-led h-2 w-2 rounded-full bg-vw-signal-sync shadow-lg shadow-vw-signal-sync/35" />
+                <span className="vw-led h-2 w-2 rounded-full bg-vw-signal-warning shadow-lg shadow-vw-signal-warning/35" />
+                <span className="vw-led h-2 w-2 rounded-full bg-vw-signal-relay shadow-lg shadow-vw-signal-relay/35" />
+              </div>
             </div>
-            <div className="space-y-3">
+
+            <div className="rounded-2xl border border-white/5 bg-vw-console-bg/55 p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="font-mono text-xs text-violet-100/55">PACKET FLOW (SIMULATED)</div>
+                <div className="flex items-center gap-2 font-mono text-[11px] text-violet-100/55">
+                  <span className="vw-led h-2 w-2 rounded-full bg-vw-signal-online" /> ok
+                  <span className="vw-led h-2 w-2 rounded-full bg-vw-signal-warning" /> warn
+                </div>
+              </div>
+              <svg viewBox="0 0 360 120" className="h-28 w-full">
+                <defs>
+                  <linearGradient id="vw-telemetry-gradient" x1="0" y1="0" x2="360" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="var(--vault-console-violet)" />
+                    <stop offset="0.55" stopColor="var(--vault-console-gold)" />
+                    <stop offset="1" stopColor="var(--vault-signal-online)" />
+                  </linearGradient>
+                  <filter id="vw-telemetry-glow" x="-20%" y="-50%" width="140%" height="200%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <path d="M 0 116 L 360 116" stroke="rgba(255,255,255,0.06)" strokeWidth="2" />
+                <path d="M 0 84 L 360 84" stroke="rgba(255,255,255,0.04)" strokeWidth="2" />
+                <path d="M 0 52 L 360 52" stroke="rgba(255,255,255,0.04)" strokeWidth="2" />
+
+                <path d={lineD} stroke="url(#vw-telemetry-gradient)" strokeWidth="3" fill="none" filter="url(#vw-telemetry-glow)" />
+              </svg>
+            </div>
+
+            <div className="mt-4 grid grid-cols-3 gap-3">
               {[
-                ['VaultDrive', 'bg-vw-signal-online'],
-                ['VaultCrypt', 'bg-vw-signal-sync'],
-                ['VaultGate', 'bg-vw-signal-relay'],
-              ].map(([label, color]) => (
-                <div key={label} className="flex items-center justify-between rounded-2xl border border-white/5 bg-vw-console-bg/55 px-4 py-3">
-                  <span className="font-mono text-sm text-violet-100/70">{label}</span>
-                  <span className={`vw-led h-2.5 w-2.5 rounded-full ${color}`} />
+                { label: 'inspect', value: 92 + (spark % 5), color: 'bg-vw-signal-online' },
+                { label: 'relay', value: 64 + ((spark * 3) % 19), color: 'bg-vw-signal-relay' },
+                { label: 'alerts', value: 3 + (spark % 4), color: 'bg-vw-signal-warning' },
+              ].map((m) => (
+                <div key={m.label} className="rounded-2xl border border-white/5 bg-vw-console-bg/55 px-4 py-3">
+                  <div className="flex items-center justify-between">
+                    <div className="font-mono text-[11px] uppercase tracking-wide text-violet-100/55">{m.label}</div>
+                    <span className={`vw-led h-2 w-2 rounded-full ${m.color}`} />
+                  </div>
+                  <div className="mt-1 font-mono text-lg font-semibold text-white">{m.value}</div>
                 </div>
               ))}
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Console Preview */}
+      <section className="bg-vw-console-bg py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 flex items-end justify-between border-b border-white/5 pb-6">
+            <div>
+              <h2 className="font-mono text-2xl font-bold text-white">Console aesthetics</h2>
+              <p className="mt-2 max-w-2xl text-violet-100/55">
+                UI that stays readable under stress: deep contrast, soft radii, and LED signifiers for status at a glance.
+              </p>
+            </div>
+            <div className="hidden items-center gap-3 sm:flex">
+              <span className="vw-led h-2.5 w-2.5 rounded-full bg-vw-signal-online shadow-lg shadow-vw-signal-online/35" />
+              <span className="vw-led h-2.5 w-2.5 rounded-full bg-vw-signal-sync shadow-lg shadow-vw-signal-sync/35" />
+              <span className="vw-led h-2.5 w-2.5 rounded-full bg-vw-signal-warning shadow-lg shadow-vw-signal-warning/35" />
+              <span className="vw-led h-2.5 w-2.5 rounded-full bg-vw-signal-relay shadow-lg shadow-vw-signal-relay/35" />
+            </div>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-12">
+            <div className="vw-card lg:col-span-7">
+              <img
+                src="/screenshots/home-console-brand.png"
+                alt="VaultWares console preview"
+                className="h-full w-full rounded-[28px] object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="space-y-6 lg:col-span-5">
+              <div className="vw-card p-6">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-vw-console-elevated text-white">
+                    <RelayCoreIcon className="h-6 w-6 text-vw-warm-bg" />
+                  </span>
+                  <div>
+                    <div className="font-mono text-sm text-white">LED semantics</div>
+                    <div className="text-xs text-violet-100/45">Color communicates state, not decoration</div>
+                  </div>
+                </div>
+                <div className="space-y-2 text-sm text-violet-100/55">
+                  {[
+                    ['Online', 'bg-vw-signal-online', 'Operational'],
+                    ['Sync', 'bg-vw-signal-sync', 'In progress'],
+                    ['Warning', 'bg-vw-signal-warning', 'Degraded'],
+                    ['Relay', 'bg-vw-signal-relay', 'Routing'],
+                  ].map(([label, color, desc]) => (
+                    <div key={label} className="flex items-center justify-between rounded-2xl border border-white/5 bg-vw-console-bg/55 px-4 py-3">
+                      <div className="flex items-center gap-3 font-mono text-xs text-white">
+                        <span className={`vw-led h-2.5 w-2.5 rounded-full ${color}`} />
+                        {label}
+                      </div>
+                      <div className="text-xs text-violet-100/55">{desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="vw-card overflow-hidden">
+                <img
+                  src="/screenshots/store-console-brand.png"
+                  alt="VaultWares store preview"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { RelayDistributedIcon } from '../icons/vaultwares-icons';
 
 export default function Navbar() {
   const { totalItems } = useCart();
@@ -20,16 +21,10 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
           <Link to="/" className="flex items-center gap-3 text-vw-console-gold">
-            <img
-              src="/favicon.svg"
-              alt="VaultWares"
-              className="h-9 w-9"
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).style.display = 'none';
-                (e.currentTarget.nextElementSibling as HTMLElement | null)?.removeAttribute('data-hidden');
-              }}
-            />
-            <span className="text-xl font-semibold tracking-tight text-white" data-hidden>
+            <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-vw-console-elevated text-white">
+              <RelayDistributedIcon className="h-6 w-6" />
+            </span>
+            <span className="text-xl font-semibold tracking-tight text-white">
               Vault<span className="text-vw-console-gold">Wares</span>
             </span>
           </Link>
