@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Product } from '../store/mockData';
+import { MOCK_PRODUCTS } from '../store/mockData';
 import ProductCard from '../components/ProductCard';
 import { Filter, Search, Loader2 } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -20,12 +21,15 @@ export default function Store() {
       setIsLoading(true);
       try {
         const response = await apiFetch('/api/products');
-        if (response.ok) {
+        const contentType = response.headers.get('content-type') ?? '';
+        if (response.ok && contentType.includes('application/json')) {
           const data = await response.json();
           setProducts(data);
+        } else {
+          setProducts(MOCK_PRODUCTS);
         }
       } catch (error) {
-        console.error('Failed to fetch products:', error);
+        setProducts(MOCK_PRODUCTS);
       } finally {
         setIsLoading(false);
       }
@@ -57,25 +61,25 @@ export default function Store() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-black text-white"
+      className="min-h-screen bg-vw-console-bg text-white"
     >
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-12 border-b border-white/10 pb-8">
-          <h1 className="mb-4 font-mono text-4xl font-bold tracking-tighter text-white">
+        <div className="mb-12 border-b border-white/5 pb-8">
+          <h1 className="mb-4 font-mono text-4xl font-bold tracking-tight text-white">
             {t('store.title')}
           </h1>
-          <p className="max-w-2xl text-zinc-400">
+          <p className="max-w-2xl text-violet-100/55">
             {t('store.desc')}
           </p>
         </div>
 
         <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-            <Filter className="mr-2 h-5 w-5 text-zinc-500" />
+            <Filter className="mr-2 h-5 w-5 text-violet-100/35" />
             <button
               onClick={() => setCategory('all')}
               className={`whitespace-nowrap rounded-full px-4 py-1.5 font-mono text-sm font-medium transition-colors ${
-                categoryFilter === 'all' ? 'bg-emerald-500 text-black' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                categoryFilter === 'all' ? 'bg-vw-console-gold text-vw-console-bg' : 'bg-vw-console-raised text-violet-100/60 hover:bg-vw-console-elevated hover:text-white'
               }`}
             >
               {t('store.filter_all').toUpperCase()}
@@ -83,7 +87,7 @@ export default function Store() {
             <button
               onClick={() => setCategory('hardware')}
               className={`whitespace-nowrap rounded-full px-4 py-1.5 font-mono text-sm font-medium transition-colors ${
-                categoryFilter === 'hardware' ? 'bg-emerald-500 text-black' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                categoryFilter === 'hardware' ? 'bg-vw-console-gold text-vw-console-bg' : 'bg-vw-console-raised text-violet-100/60 hover:bg-vw-console-elevated hover:text-white'
               }`}
             >
               {t('store.filter_hw').toUpperCase()}
@@ -91,7 +95,7 @@ export default function Store() {
             <button
               onClick={() => setCategory('software')}
               className={`whitespace-nowrap rounded-full px-4 py-1.5 font-mono text-sm font-medium transition-colors ${
-                categoryFilter === 'software' ? 'bg-emerald-500 text-black' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                categoryFilter === 'software' ? 'bg-vw-console-gold text-vw-console-bg' : 'bg-vw-console-raised text-violet-100/60 hover:bg-vw-console-elevated hover:text-white'
               }`}
             >
               {t('store.filter_sw').toUpperCase()}
@@ -100,21 +104,21 @@ export default function Store() {
 
           <div className="relative w-full md:w-72">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <Search className="h-4 w-4 text-zinc-500" />
+              <Search className="h-4 w-4 text-violet-100/35" />
             </div>
             <input
               type="text"
               placeholder={t('store.search_placeholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full rounded-lg border border-white/10 bg-zinc-900/50 py-2 pl-10 pr-3 font-mono text-sm text-white placeholder-zinc-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="block w-full rounded-2xl border border-white/5 bg-vw-console-raised py-2 pl-10 pr-3 font-mono text-sm text-white placeholder-violet-100/30 focus:border-vw-console-violet focus:outline-none focus:ring-1 focus:ring-vw-console-violet"
             />
           </div>
         </div>
 
         {isLoading ? (
           <div className="flex min-h-[40vh] items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
+            <Loader2 className="h-8 w-8 animate-spin text-vw-console-gold" />
           </div>
         ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -123,16 +127,16 @@ export default function Store() {
             ))}
           </div>
         ) : (
-          <div className="flex min-h-[40vh] flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-zinc-900/20 py-12 text-center">
-            <Search className="mb-4 h-12 w-12 text-zinc-600" />
+          <div className="flex min-h-[40vh] flex-col items-center justify-center rounded-[28px] border border-dashed border-white/10 bg-vw-console-raised/30 py-12 text-center">
+            <Search className="mb-4 h-12 w-12 text-violet-100/30" />
             <h3 className="mb-2 font-mono text-lg font-bold text-white">{t('store.no_results')}</h3>
-            <p className="text-zinc-500">{t('store.no_results_desc')}</p>
+            <p className="text-violet-100/40">{t('store.no_results_desc')}</p>
             <button
               onClick={() => {
                 setSearchQuery('');
                 setCategory('all');
               }}
-              className="mt-6 font-mono text-sm font-bold text-emerald-400 hover:text-emerald-300"
+              className="mt-6 font-mono text-sm font-bold text-vw-console-gold hover:text-vw-signal-warning"
             >
               [ {t('store.filter_all').toUpperCase()} ]
             </button>

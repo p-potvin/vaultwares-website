@@ -44,31 +44,31 @@ export default function Login() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex min-h-screen items-center justify-center bg-black px-4 py-16"
+      className="flex min-h-screen items-center justify-center bg-vw-console-bg px-4 py-16"
     >
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 flex flex-col items-center gap-3">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-vw-console-elevated text-vw-console-gold">
             <Shield className="h-8 w-8" />
           </div>
-          <h1 className="font-mono text-2xl font-bold tracking-tighter text-white">
+          <h1 className="font-mono text-2xl font-bold tracking-tight text-white">
             {mode === 'login' ? t('auth.login_title') : t('auth.register_title')}
           </h1>
-          <div className="flex items-center gap-1.5 text-xs text-zinc-500">
+          <div className="flex items-center gap-1.5 text-xs text-violet-100/45">
             <Lock className="h-3 w-3" />
             <span>AES-256 Encrypted</span>
           </div>
         </div>
 
         {/* Tab switcher */}
-        <div className="mb-6 grid grid-cols-2 rounded-lg border border-white/10 bg-zinc-900/50 p-1">
+        <div className="mb-6 grid grid-cols-2 rounded-2xl border border-white/5 bg-vw-console-raised p-1">
           <button
             onClick={() => { setMode('login'); setError(''); }}
             className={`flex items-center justify-center gap-2 rounded-md py-2.5 font-mono text-sm font-bold transition-colors ${
               mode === 'login'
-                ? 'bg-emerald-500 text-black'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-vw-console-gold text-vw-console-bg'
+                : 'text-violet-100/60 hover:text-white'
             }`}
           >
             <LogIn className="h-4 w-4" />
@@ -78,8 +78,8 @@ export default function Login() {
             onClick={() => { setMode('register'); setError(''); }}
             className={`flex items-center justify-center gap-2 rounded-md py-2.5 font-mono text-sm font-bold transition-colors ${
               mode === 'register'
-                ? 'bg-emerald-500 text-black'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-vw-console-gold text-vw-console-bg'
+                : 'text-violet-100/60 hover:text-white'
             }`}
           >
             <UserPlus className="h-4 w-4" />
@@ -88,11 +88,11 @@ export default function Login() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="rounded-2xl border border-white/10 bg-zinc-900/50 p-8 space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5 rounded-[28px] border border-white/5 bg-vw-console-raised/70 p-8">
           {mode === 'register' && (
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="mb-2 block font-mono text-xs font-bold text-zinc-400">
+                <label className="mb-2 block font-mono text-xs font-bold text-violet-100/55">
                   {t('auth.first_name')}
                 </label>
                 <input
@@ -102,11 +102,11 @@ export default function Login() {
                   value={form.firstName}
                   onChange={handleChange}
                   autoComplete="given-name"
-                  className="w-full rounded-lg border border-white/10 bg-black px-4 py-3 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  className="w-full rounded-2xl border border-white/5 bg-vw-console-bg px-4 py-3 font-mono text-sm text-white focus:border-vw-console-violet focus:outline-none focus:ring-1 focus:ring-vw-console-violet"
                 />
               </div>
               <div>
-                <label className="mb-2 block font-mono text-xs font-bold text-zinc-400">
+                <label className="mb-2 block font-mono text-xs font-bold text-violet-100/55">
                   {t('auth.last_name')}
                 </label>
                 <input
@@ -116,14 +116,14 @@ export default function Login() {
                   value={form.lastName}
                   onChange={handleChange}
                   autoComplete="family-name"
-                  className="w-full rounded-lg border border-white/10 bg-black px-4 py-3 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                  className="w-full rounded-2xl border border-white/5 bg-vw-console-bg px-4 py-3 font-mono text-sm text-white focus:border-vw-console-violet focus:outline-none focus:ring-1 focus:ring-vw-console-violet"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="mb-2 block font-mono text-xs font-bold text-zinc-400">
+            <label className="mb-2 block font-mono text-xs font-bold text-violet-100/55">
               {t('auth.email')}
             </label>
             <input
@@ -134,12 +134,12 @@ export default function Login() {
               onChange={handleChange}
               autoComplete="email"
               placeholder="secure@example.com"
-              className="w-full rounded-lg border border-white/10 bg-black px-4 py-3 font-mono text-sm text-white placeholder-zinc-600 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="w-full rounded-2xl border border-white/5 bg-vw-console-bg px-4 py-3 font-mono text-sm text-white placeholder-violet-100/25 focus:border-vw-console-violet focus:outline-none focus:ring-1 focus:ring-vw-console-violet"
             />
           </div>
 
           <div>
-            <label className="mb-2 block font-mono text-xs font-bold text-zinc-400">
+            <label className="mb-2 block font-mono text-xs font-bold text-violet-100/55">
               {t('auth.password')}
             </label>
             <input
@@ -150,12 +150,12 @@ export default function Login() {
               onChange={handleChange}
               autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
               minLength={mode === 'register' ? 8 : undefined}
-              className="w-full rounded-lg border border-white/10 bg-black px-4 py-3 font-mono text-sm text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="w-full rounded-2xl border border-white/5 bg-vw-console-bg px-4 py-3 font-mono text-sm text-white focus:border-vw-console-violet focus:outline-none focus:ring-1 focus:ring-vw-console-violet"
             />
           </div>
 
           {error && (
-            <p className="rounded-lg bg-red-500/10 px-4 py-3 font-mono text-xs text-red-400 border border-red-500/20">
+            <p className="rounded-2xl bg-vw-signal-alert/10 px-4 py-3 font-mono text-xs text-vw-signal-alert border border-vw-signal-alert/20">
               {error}
             </p>
           )}
@@ -163,7 +163,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-8 py-4 font-mono text-sm font-bold text-black transition-all hover:bg-emerald-400 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-vw-console-gold px-8 py-4 font-mono text-sm font-bold text-vw-console-bg transition-all hover:bg-vw-signal-warning disabled:cursor-not-allowed disabled:bg-vw-console-bg disabled:text-violet-100/30"
           >
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />

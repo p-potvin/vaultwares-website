@@ -11,7 +11,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 backdrop-blur-sm transition-all hover:border-emerald-500/50 hover:bg-zinc-900/80">
+    <div className="group relative flex flex-col overflow-hidden rounded-[28px] border border-white/5 bg-vw-console-raised/80 transition-all hover:border-vw-console-violet/30 hover:bg-vw-console-elevated">
       <Link to={`/product/${product.id}`} className="block aspect-[4/3] overflow-hidden">
         <img
           src={product.image_url}
@@ -19,7 +19,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-black/80 px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider text-emerald-400 backdrop-blur-md">
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/5 bg-vw-console-bg/85 px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider text-vw-console-gold backdrop-blur-md">
           {product.category === 'hardware' ? <Cpu className="h-3 w-3" /> : <Code className="h-3 w-3" />}
           {product.category === 'hardware' ? t('store.filter_hw') : t('store.filter_sw')}
         </div>
@@ -28,21 +28,21 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-2 flex items-start justify-between gap-4">
           <Link to={`/product/${product.id}`}>
-            <h3 className="font-sans text-lg font-bold text-white transition-colors hover:text-emerald-400">
+            <h3 className="font-sans text-lg font-semibold text-white transition-colors hover:text-vw-console-gold">
               {product.name}
             </h3>
           </Link>
-          <span className="font-mono text-lg font-bold text-white">
+          <span className="font-mono text-lg font-bold text-vw-console-gold">
             ${product.price.toFixed(2)}
           </span>
         </div>
 
-        <p className="mb-6 line-clamp-2 flex-1 text-sm text-zinc-400">
+        <p className="mb-6 line-clamp-2 flex-1 text-sm text-violet-100/55">
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between border-t border-white/10 pt-4">
-          <span className="font-mono text-xs text-zinc-500">
+        <div className="flex items-center justify-between border-t border-white/5 pt-4">
+          <span className="font-mono text-xs text-violet-100/40">
             {t('product.sku')}: {product.sku}
           </span>
           <button
@@ -51,8 +51,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             className={cn(
               "flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-sm font-bold transition-all",
               product.is_active && product.inventory_count > 0
-                ? "bg-emerald-500 text-black hover:bg-emerald-400"
-                : "cursor-not-allowed bg-zinc-800 text-zinc-500"
+                ? "bg-vw-console-gold text-vw-console-bg hover:bg-vw-signal-warning"
+                : "cursor-not-allowed bg-vw-console-bg text-violet-100/30"
             )}
           >
             <ShoppingCart className="h-4 w-4" />

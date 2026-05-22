@@ -5,7 +5,7 @@
   },
   "p-privacy-hub": {
     "name": "Aegis Privacy Hub",
-    "description": "Reprenez le contrôle de votre réseau. Cette passerelle prête à l'emploi comprend un bloqueur de publicités AdGuard à l'échelle du réseau, un client VPN WireGuard intégré et un cryptage DNS de niveau militaire. Empêchez votre FAI d'espionner votre trafic et bloquez les traqueurs avant qu'ils n'atteignent vos appareils. Peut être utilisé seul ou intégré de manière transparente avec l'Aegis Network Sentry."
+    "description": "Reprenez le contrôle de votre réseau. Cette passerelle prête à l'emploi comprend un bloqueur de publicités AdGuard à l'échelle du réseau, un client VPN WireGuard intégré et un transport DNS chiffré. Empêchez votre FAI d'espionner votre trafic et bloquez les traqueurs avant qu'ils n'atteignent vos appareils. Peut être utilisé seul ou intégré de manière transparente avec l'Aegis Network Sentry."
   },
   "p-nomad-router": {
     "name": "Routeur Mobile Sécurisé Nomad",

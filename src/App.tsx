@@ -25,7 +25,7 @@ const Account = lazy(() => import('./pages/Account'));
 // Loading fallback
 const PageLoader = () => (
   <div className="flex min-h-[60vh] items-center justify-center">
-    <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
+    <Loader2 className="h-8 w-8 animate-spin text-vw-console-gold" />
   </div>
 );
 
@@ -34,7 +34,7 @@ export default function App() {
     <AuthProvider>
       <CartProvider>
         <Router>
-          <div className="flex min-h-screen flex-col bg-black font-sans text-white selection:bg-emerald-500/30">
+          <div className="flex min-h-screen flex-col bg-vw-console-bg font-sans text-white selection:bg-vw-console-violet/30">
             <Navbar />
             <main className="flex-1">
               <Suspense fallback={<PageLoader />}>
@@ -50,8 +50,8 @@ export default function App() {
                   <Route path="/account" element={<Account />} />
                   <Route path="*" element={
                     <div className="flex min-h-[60vh] flex-col items-center justify-center">
-                      <h1 className="font-mono text-4xl font-bold text-emerald-500">404</h1>
-                      <p className="text-zinc-400">PAGE INTROUVABLE</p>
+                      <h1 className="font-mono text-4xl font-bold text-vw-console-gold">404</h1>
+                      <p className="text-violet-100/60">PAGE INTROUVABLE</p>
                     </div>
                   } />
                 </Routes>

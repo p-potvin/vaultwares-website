@@ -25,7 +25,7 @@ export const MOCK_PRODUCTS: Product[] = [
   {
     id: 'p-privacy-hub',
     name: 'Aegis Privacy Hub',
-    description: 'Take back control of your network. This plug-and-play gateway features a network-wide AdGuard adblocker, a built-in WireGuard VPN client, and military-grade DNS encryption. Stop your ISP from snooping on your traffic and block trackers before they reach your devices. Can be used standalone or integrated seamlessly with the Aegis Network Sentry.',
+    description: 'Take back control of your network. This plug-and-play gateway features a network-wide AdGuard adblocker, a built-in WireGuard VPN client, and encrypted DNS transport. Stop your ISP from snooping on your traffic and block trackers before they reach your devices. Can be used standalone or integrated seamlessly with the Aegis Network Sentry.',
     sku: 'AEGIS-PRV-01',
     price: 249.99,
     inventory_count: 75,

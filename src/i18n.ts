@@ -27,7 +27,7 @@ const resources = {
         feat_3_desc: 'Take back control of your network with our Intrusion Detection Systems and Privacy Hubs. Block ISP snooping and malicious traffic at the gateway.',
         featured_hw: 'FEATURED HARDWARE',
         featured_hw_desc: 'Top-tier security appliances for uncompromising protection.',
-        view_all: 'VIEW ALL [→]',
+        view_all: 'VIEW ALL',
       },
       footer: {
         desc: 'Securing your digital life with enterprise-grade hardware and software solutions.',
@@ -119,7 +119,7 @@ const resources = {
       blog: {
         title: 'THREAT INTEL & GUIDES',
         desc: 'Insights, guides, and philosophy on digital privacy, cybersecurity, and reclaiming your autonomy in the digital age.',
-        read_more: 'READ MORE [→]',
+        read_more: 'READ MORE',
         not_found: 'POST NOT FOUND',
         not_found_desc: 'The intel you are looking for does not exist or has been redacted.',
         back_to_intel: 'BACK TO INTEL',
@@ -161,7 +161,7 @@ const resources = {
         },
         'p-privacy-hub': {
           name: 'Aegis Privacy Hub',
-          desc: 'Take back control of your network. This plug-and-play gateway features a network-wide AdGuard adblocker, a built-in WireGuard VPN client, and military-grade DNS encryption. Stop your ISP from snooping on your traffic and block trackers before they reach your devices. Can be used standalone or integrated seamlessly with the Aegis Network Sentry.'
+          desc: 'Take back control of your network. This plug-and-play gateway features a network-wide AdGuard adblocker, a built-in WireGuard VPN client, and encrypted DNS transport. Stop your ISP from snooping on your traffic and block trackers before they reach your devices. Can be used standalone or integrated seamlessly with the Aegis Network Sentry.'
         },
         'p-nomad-router': {
           name: 'Nomad Secure Mobile Router',
@@ -390,7 +390,7 @@ We must equip the next generation with the tools and the mindset to navigate a w
         feat_3_desc: 'Reprenez le contrôle de votre réseau avec nos Systèmes de Détection d\'Intrusion et nos Hubs de Confidentialité. Bloquez l\'espionnage des FAI et le trafic malveillant à la passerelle.',
         featured_hw: 'MATÉRIEL PHARE',
         featured_hw_desc: 'Appareils de sécurité haut de gamme pour une protection sans compromis.',
-        view_all: 'TOUT VOIR [→]',
+        view_all: 'TOUT VOIR',
       },
       footer: {
         desc: 'Sécuriser votre vie numérique avec des solutions matérielles et logicielles de niveau entreprise.',
@@ -482,7 +482,7 @@ We must equip the next generation with the tools and the mindset to navigate a w
       blog: {
         title: 'SÉCURITÉ INFOS',
         desc: 'Aperçus, guides et philosophie sur la confidentialité numérique, la cybersécurité et la reconquête de votre autonomie à l\'ère numérique.',
-        read_more: 'LIRE LA SUITE [→]',
+        read_more: 'LIRE LA SUITE',
         not_found: 'ARTICLE INTROUVABLE',
         not_found_desc: 'Les informations que vous recherchez n\'existent pas ou ont été expurgées.',
         back_to_intel: 'RETOUR AUX INFOS',
@@ -524,7 +524,7 @@ We must equip the next generation with the tools and the mindset to navigate a w
         },
         'p-privacy-hub': {
           name: 'Aegis Privacy Hub',
-          desc: 'Reprenez le contrôle de votre réseau. Cette passerelle prête à l\'emploi comprend un bloqueur de publicités AdGuard à l\'échelle du réseau, un client VPN WireGuard intégré et un cryptage DNS de niveau militaire. Empêchez votre FAI d\'espionner votre trafic et bloquez les traqueurs avant qu\'ils n\'atteignent vos appareils. Peut être utilisé seul ou intégré de manière transparente avec l\'Aegis Network Sentry.'
+          desc: 'Reprenez le contrôle de votre réseau. Cette passerelle prête à l\'emploi comprend un bloqueur de publicités AdGuard à l\'échelle du réseau, un client VPN WireGuard intégré et un transport DNS chiffré. Empêchez votre FAI d\'espionner votre trafic et bloquez les traqueurs avant qu\'ils n\'atteignent vos appareils. Peut être utilisé seul ou intégré de manière transparente avec l\'Aegis Network Sentry.'
         },
         'p-nomad-router': {
           name: 'Routeur Mobile Sécurisé Nomad',
