@@ -41,7 +41,7 @@ export default function Navbar() {
               className="flex items-center gap-1 rounded-xl border border-white/5 bg-vw-console-raised px-3 py-2 font-mono text-xs font-medium text-violet-100/65 transition-colors hover:text-vw-console-gold"
             >
               <Globe className="h-4 w-4" />
-              {i18n.language.toUpperCase()}
+              {i18n.language === 'en' ? 'EN' : 'QC'}
             </button>
             {user ? (
               <>
